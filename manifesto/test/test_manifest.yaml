@@ -1,0 +1,13 @@
+project: TestProject
+version: 0.1.0
+author: Jeffrey "The Dude" Lebowski
+
+build: cmake
+ci: travis
+
+structure: gnu
+
+dependencies:
+  - something: hash
+  - somethingelse: 0.1.2
+  - somethingelseentirely: http://git.com
