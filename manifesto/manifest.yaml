@@ -1,0 +1,8 @@
+project: manifesto
+version: 0.1.0
+description: A manifest generator/parser/emitter.
+author: Adam Thorpe
+
+build: cmake
+  - header
+  - bin

@@ -1,0 +1,13 @@
+project: scaffold
+version: 0.1.0
+description: A simple C++ code scaffolding tool.
+author: Adam Thorpe
+
+build: cmake
+  - header
+  - bin
+
+dependencies:
+  - clap
+  - manifest
+  - tpl

@@ -35,9 +35,9 @@ your system (__Recommended__).
 > # manifesto -v
 ```
 
-### The `.manifest.yaml` Configuration File
+### The `manifest.yaml` Configuration File
 
-All of your project's configuration is stored in a `.manifest.yaml`
+All of your project's configuration is stored in a `manifest.yaml`
 config file. Run `manifesto init` in your project directory to generate a new
 config file with a step-by-step command-line walkthrough.
 
@@ -49,7 +49,7 @@ config file with a step-by-step command-line walkthrough.
 Once you have a config file,  run `scaffold` in the project directory to
 generate a minimal project skeleton.
 
-Sample `.manifest.yaml` file:
+Sample `manifest.yaml` file:
 ```yaml
 project: TestProject
 version: 0.1.0

@@ -10,7 +10,10 @@
 #include <tpl/tpl.hpp>
 
 #include "tpl/class.tpl"
-#include "tpl/cmake_header_only.tpl"
+#include "tpl/cmake.tpl"
+#include "tpl/cmake_app.tpl"
+#include "tpl/cmake_header_lib.tpl"
+#include "tpl/cmake_shared_lib.tpl"
 #include "tpl/header.tpl"
 #include "tpl/source.tpl"
 
@@ -50,7 +53,7 @@ bool Scaffold::create_directory(std::filesystem::path const &p) {
 }
 
 void Scaffold::generate_cmake(std::filesystem::path const &dest) {
-  std::stringstream src_file(tpl_cmake_header_only);
+  std::stringstream src_file(tpl_cmake);
   std::ofstream dest_file(dest);
   if (!dest_file)
     return;

@@ -1,0 +1,7 @@
+project: tpl
+version: 0.1.0
+description: A simple C++ string templating library similar to Mustache.
+author: Adam Thorpe
+
+build: cmake
+  - header

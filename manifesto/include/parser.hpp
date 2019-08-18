@@ -17,7 +17,10 @@ using std::regex;
 class Parser {
 private:
 
-  const regex yaml_line = regex("(\\s*)-?\\s*([^:\\s]+)\\s*:?\\s*(.*)");
+  const regex is_dict = regex("\\s*-?\\s*[^:\\s]+\\s*:.*");
+  const regex is_list = regex("\\s*-\\s*.+");
+  const regex yaml_dict = regex("(\\s*)-?\\s*([^:\\s]+)\\s*:?\\s*(.*)");
+  const regex yaml_list = regex("(\\s*)-\\s*(.+)");
 
 public:
 
@@ -33,29 +36,10 @@ KVIStore Parser::parse(string s) {
 
   std::stringstream src(s);
 
-  string line;
-  std::smatch match;
-
-  string key;
-  string value;
-  string indent;
-
-  while(std::getline(src, line)) {
-    if(regex_match(line, match, yaml_line)) {
-      key = match[2];
-      value = match[3];
-      indent = match[1];
-
-      KVITuple m = {key, value, indent};
-
-      result.emplace_back(m);
-    }
-  }
-
-  return result;
+  return parse(src);
 }
 
-KVIStore Parser::parse(std::stringstream &s) {
+KVIStore Parser::parse(std::stringstream &src) {
   KVIStore result;
 
   string line;
@@ -65,15 +49,27 @@ KVIStore Parser::parse(std::stringstream &s) {
   string value;
   string indent;
 
-  while(std::getline(s, line)) {
-    if(regex_match(line, match, yaml_line)) {
-      key = match[2];
-      value = match[3];
-      indent = match[1];
+  while(std::getline(src, line)) {
+    if(regex_match(line, match, is_dict)) {
+      if(regex_match(line, match, yaml_dict)) {
+        key = match[2];
+        value = match[3];
+        indent = match[1];
 
-      KVITuple m = {key, value, indent};
+        KVITuple m = {key, value, indent};
 
-      result.emplace_back(m);
+        result.emplace_back(m);
+      }
+    }
+    else if(regex_match(line, match, is_list)) {
+      if(regex_match(line, match, yaml_list)) {
+        value = match[2];
+        indent = match[1];
+
+        KVITuple m = {"", value, indent};
+
+        result.emplace_back(m);
+      }
     }
   }
 

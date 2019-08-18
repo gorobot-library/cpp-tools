@@ -36,18 +36,25 @@ string Emitter::emit(KVIStore &kv) {
   KVIStore sub;
 
   for(size_t i = 0; i < kv.size(); i++) {
-    sub = kv.subtree(i);
-    if(sub.size() == 1) {
-      if(sub[0][1].empty()) {
-        result += kv[i][2] + "- " + kv[i][0] + '\n';
-      }
-      else {
-        result += kv[i][2] + kv[i][0] + ": " + kv[i][1] + '\n';
-      }
+    if(!kv[i][2].empty()) {
+      result += kv[i][2] + "- ";
+    }
+
+    if(!kv[i][0].empty()) {
+      result += kv[i][0];
+    }
+
+    if(!kv[i][0].empty()) {
+      result += ": " + kv[i][1];
+    }
+    else if(kv.subtree(i).size() > 1) {
+      result += ":";
     }
     else {
-      result += kv[i][2] + kv[i][0] + ": " + kv[i][1] + '\n';
+      result += kv[i][1];
     }
+
+    result += '\n';
   }
 
   return result;

@@ -1,0 +1,8 @@
+project: clap
+version: 0.1.0
+description: A modern, minimal Command Line Argument Parser.
+author: Adam Thorpe
+
+build: cmake
+  - header
+  - bin
